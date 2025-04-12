@@ -1,0 +1,22 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.actualizacion-general {
+    font-size: 1rem;
+    color: #ffffff;
+    margin-bottom: 2rem;
+}
+
+.gradient-bg {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #017086, #0b444d);
+    color: white;
+}
