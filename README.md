@@ -1,12 +1,40 @@
-# React + Vite
+# DolarActual
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+DolarActual es una web interactiva para consultar las cotizaciones de los distintos tipos de dólar en Argentina, visualizar su evolución histórica, convertir entre pesos y dólares, y consultar la inflación mensual. 
 
-Currently, two official plugins are available:
+## Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Conversor de monedas entre pesos argentinos y diferentes tipos de dólar.
+- Visualización de cotizaciones actualizadas: Oficial, Blue, MEP, Contado con Liqui, etc.
+- Gráficos históricos diarios de cada tipo de dólar (últimos 6 meses).
+- Consulta de inflación mensual con gráfico.
+- Interfaz moderna, responsiva y fácil de usar.
+- Fuente de datos: [ArgentinaDatos.com](https://www.argentinadatos.com/).
 
-## Expanding the ESLint configuration
+## Tecnologías
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React
+- Bootstrap 5
+- Framer Motion
+- MUI X Charts
+- ApexCharts
+- API pública de ArgentinaDatos
+
+## Estructura principal
+
+- `src/components/Conversor.jsx`: Conversor de monedas.
+- `src/components/ListaDolares.jsx`: Lista y cards de cotizaciones.
+- `src/components/GraficoDolar.jsx`: Gráfico histórico de cada dólar.
+- `src/components/Inflacion.jsx`: Gráfico de inflación mensual.
+- `src/components/Footer.jsx`: Pie de página con créditos y fuente de datos.
+- `src/hooks/useDolares.js`: Hook para obtener cotizaciones desde la API.
+
+## Créditos
+
+- Desarrollado por Carlos Ramírez Díaz.
+- Fuente de datos: [ArgentinaDatos.com](https://www.argentinadatos.com/).
+- GitHub: [RamirezDiazCarlos](https://github.com/RamirezDiazCarlos)
+
+---
+
+> Los valores mostrados son informativos y pueden diferir de los valores oficiales. No constituyen recomendación financiera.
