@@ -5,7 +5,7 @@ import Conversor from "./components/Conversor";
 import Navbar from "./components/Navbar";
 import ListaDolares from "./components/ListaDolares";
 import useDolares from "./hooks/useDolares";
-
+import Footer from './components/footer';
 
 function App() {
 
@@ -20,6 +20,7 @@ function App() {
       <Conversor/>
       <ListaDolares dolares={dolares} />
       <Inflacion />
+      <Footer />
     </div>
   )
 }

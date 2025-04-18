@@ -49,7 +49,13 @@ const Conversor = () => {
                     <div className="col-md-5">
                         <label htmlFor="monto" className="form-label">Cantidad</label>
                         <div className="input-group">
-                            <span className="input-group-text">{aDolares ? '🇦🇷' : '🇺🇸'}</span>
+                            <span className="input-group-text" style={{ background: "transparent", border: "none" }}>
+                                <img
+                                    src={aDolares ? "/ar.svg" : "/us.svg"}
+                                    alt={aDolares ? "Peso argentino" : "Dólar estadounidense"}
+                                    style={{ width: 24, height: 24 }}
+                                />
+                            </span>
                             <input
                                 id="monto"
                                 name="monto"
@@ -76,7 +82,13 @@ const Conversor = () => {
                     <div className="col-md-5">
                         <label htmlFor="resultado" className="form-label">Convertido a</label>
                         <div className="input-group">
-                            <span className="input-group-text">{aDolares ? '🇺🇸' : '🇦🇷'}</span>
+                            <span className="input-group-text" style={{ background: "transparent", border: "none" }}>
+                                <img
+                                    src={aDolares ? "/us.svg" : "/ar.svg"}
+                                    alt={aDolares ? "Dólar estadounidense" : "Peso argentino"}
+                                    style={{ width: 24, height: 24 }}
+                                />
+                            </span>
                             <input
                                 id="resultado"
                                 name="resultado"

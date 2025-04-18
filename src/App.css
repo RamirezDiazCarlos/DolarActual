@@ -20,3 +20,7 @@ h1 {
     background: linear-gradient(to bottom, #017086, #0b444d);
     color: white;
 }
+
+.card-col {
+    transition: all 0.5s cubic-bezier(.4,2,.6,1);
+}
