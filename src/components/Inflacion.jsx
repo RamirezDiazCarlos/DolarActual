@@ -82,7 +82,7 @@ const Inflacion = () => {
     }, []);
 
     return (
-        <div className="bg-[#0f3d42] p-4 rounded-xl shadow-md mt-6 max-w-3xl mx-auto">
+        <div className="mt-4 bg-[#0f3d42] p-4 rounded-xl shadow-md mt-6 max-w-3xl mx-auto">
             <ReactApexChart options={options} series={series} type="bar" height={450} />
         </div>
     );

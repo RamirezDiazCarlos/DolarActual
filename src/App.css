@@ -1,3 +1,4 @@
+
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -21,6 +22,22 @@ h1 {
     color: white;
 }
 
+.card {
+    box-shadow: 0 4px 24px rgba(64,196,255,0.08), 0 1.5px 4px rgba(0,0,0,0.12);
+}
+
 .card-col {
-    transition: all 0.5s cubic-bezier(.4,2,.6,1);
+    transition: all 0.9s cubic-bezier(.4,2,.6,1);
+}
+
+.card-hover {
+    cursor: pointer;
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.card.card-hover:hover {
+    box-shadow: 0 8px 32px rgba(64,196,255,0.25), 0 4px 8px rgba(0,0,0,0.3) !important;
+    transform: scale(1.04) !important;
+    border-color: #2ac19d !important;
+    z-index: 2;
 }

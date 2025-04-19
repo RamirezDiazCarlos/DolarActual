@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import CardDolar from "./CardDolar";
 import GraficoDolar from "./GraficoDolar";
 import { motion } from "framer-motion";
@@ -39,6 +39,7 @@ const ListaDolares = ({ dolares }) => {
     const [seleccionada, setSeleccionada] = useState(null);
     const [historico, setHistorico] = useState({});
     const [loading, setLoading] = useState(false);
+    const intervalRef = useRef();
 
     const handleExpand = async (d) => {
         if (seleccionada === d.nombre) {
@@ -54,15 +55,26 @@ const ListaDolares = ({ dolares }) => {
         }
     };
 
+    useEffect(() => {
+        if (!seleccionada) return;
+
+        const actualizarHistorico = async () => {
+            setLoading(true);
+            const datos = await fetchHistorico(seleccionada);
+            setHistorico(h => ({ ...h, [seleccionada]: datos }));
+            setLoading(false);
+        };
+
+        actualizarHistorico();
+
+        intervalRef.current = setInterval(actualizarHistorico, 300000);
+
+        return () => clearInterval(intervalRef.current);
+    }, [seleccionada]);
+
     return (
         <div className="container text-center mt-4">
-            <h1 className="mb-2">Cotizaciones</h1>
-
-            {dolares[0]?.fechaActualizacion && (
-                <p className="actualizacion-general">
-                    Actualizado: {new Date(dolares[0].fechaActualizacion).toLocaleDateString('es-AR')}
-                </p>
-            )}
+            <h1 className="mb-4 ">Cotizaciones</h1>
 
             <div className="row g-4 justify-content-center">
                 {dolares.map(d => {
@@ -76,25 +88,23 @@ const ListaDolares = ({ dolares }) => {
                                 minHeight: expandida ? 420 : 0,
                             }}
                         >
-                            <div
-                                style={{ width: expandida ? "100%" : 300, cursor: "pointer" }}
+                            <CardDolar
+                                nombre={d.nombre}
+                                compra={d.compra}
+                                venta={d.venta}
+                                fecha={d.fechaActualizacion}
+                                expandida={expandida}
+                                hoverable={!expandida}
                                 onClick={() => handleExpand(d)}
+                                style={{ width: expandida ? "100%" : 300, cursor: "pointer" }}
                             >
-                                <CardDolar
-                                    nombre={d.nombre}
-                                    compra={d.compra}
-                                    venta={d.venta}
-                                    fecha={d.fechaActualizacion}
-                                    expandida={expandida}
-                                >
-                                    {expandida && (
-                                        <div style={{ marginTop: 24 }}>
-                                            {loading && !historico[d.nombre] && <div>Cargando gráfico...</div>}
-                                            {historico[d.nombre] && <GraficoDolar datos={historico[d.nombre]} />}
-                                        </div>
-                                    )}
-                                </CardDolar>
-                            </div>
+                                {expandida && (
+                                    <div style={{ marginTop: 24, width: "100%", padding: "0 32px" }}>
+                                        {loading && !historico[d.nombre] && <div>Cargando gráfico...</div>}
+                                        {historico[d.nombre] && <GraficoDolar datos={historico[d.nombre]} />}
+                                    </div>
+                                )}
+                            </CardDolar>
                         </motion.div>
                     );
                 })}

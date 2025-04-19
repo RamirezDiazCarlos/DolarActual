@@ -1,10 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const CardDolar = ({ nombre, compra, venta, fecha, children, expandida }) => (
+const CardDolar = ({ nombre, compra, venta, fecha, children, expandida, hoverable, onClick, style }) => (
     <motion.div
-        layout
-        className="card text-white bg-dark mb-3 shadow border border-secondary"
+        layout="position"
+        className={`card text-white bg-dark mb-3 shadow border border-secondary${hoverable ? " card-hover" : ""}`}
         style={{
             width: "100%",
             borderRadius: "0.75rem",
@@ -12,16 +12,19 @@ const CardDolar = ({ nombre, compra, venta, fecha, children, expandida }) => (
             boxShadow: expandida
                 ? "0 16px 40px rgba(0,0,0,0.7)"
                 : "0 4px 8px rgba(0,0,0,0.3)",
+            ...style
         }}
         transition={{
-            type: "spring",
-            stiffness: 300,
-            damping: 30
+            type: "tween",
+            duration: 1,
+            ease: "linear"
         }}
+        onClick={onClick}
     >
         <div className="card-body" style={{
             textAlign: expandida ? "center" : "left",
-            transition: "all 0.8s cubic-bezier(.4,2,.6,1)"
+            transition: "all 0.8s cubic-bezier(.4,2,.6,1)",
+            padding: expandida ? 0 : undefined
         }}>
             <h4
                 className="card-title"
@@ -56,6 +59,9 @@ const CardDolar = ({ nombre, compra, venta, fecha, children, expandida }) => (
         <div className="card-footer">
             <small className="card-text">
                 Actualizado: {new Date(fecha).toLocaleString("es-AR", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "2-digit",
                     hour: "2-digit",
                     minute: "2-digit",
                 })}
