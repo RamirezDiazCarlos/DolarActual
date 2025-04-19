@@ -22,12 +22,12 @@ DolarActual es una web interactiva para consultar las cotizaciones de los distin
 
 ## Estructura principal
 
-- `src/components/Conversor.jsx`: Conversor de monedas.
-- `src/components/ListaDolares.jsx`: Lista y cards de cotizaciones.
-- `src/components/GraficoDolar.jsx`: Gráfico histórico de cada dólar.
-- `src/components/Inflacion.jsx`: Gráfico de inflación mensual.
-- `src/components/Footer.jsx`: Pie de página con créditos y fuente de datos.
-- `src/hooks/useDolares.js`: Hook para obtener cotizaciones desde la API.
+- Conversor de monedas.
+- Lista y cards de cotizaciones.
+- Gráfico histórico de cada dólar.
+- Gráfico de inflación mensual.
+- Pie de página con créditos y fuente de datos.
+- Hook para obtener cotizaciones desde la API.
 
 ## Créditos
 
