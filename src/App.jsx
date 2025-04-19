@@ -5,7 +5,7 @@ import Conversor from "./components/Conversor";
 import Navbar from "./components/Navbar";
 import ListaDolares from "./components/ListaDolares";
 import useDolares from "./hooks/useDolares";
-import Footer from './components/footer';
+import Footer from './components/Footer';
 
 function App() {
 
