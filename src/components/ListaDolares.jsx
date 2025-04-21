@@ -70,7 +70,7 @@ const ListaDolares = ({ dolares }) => {
         intervalRef.current = setInterval(actualizarHistorico, 300000);
 
         return () => clearInterval(intervalRef.current);
-    }, [seleccionada]);
+    }, [seleccionada, dolares]);
 
     return (
         <div className="container text-center mt-4">
@@ -99,9 +99,12 @@ const ListaDolares = ({ dolares }) => {
                                 style={{ width: expandida ? "100%" : 300, cursor: "pointer" }}
                             >
                                 {expandida && (
-                                    <div style={{ marginTop: 24, width: "100%", padding: "0 32px" }}>
+                                    <div
+                                        style={{ marginTop: 24, width: "100%", padding: "0 32px" }}
+                                        onClick={e => e.stopPropagation()}
+                                    >
                                         {loading && !historico[d.nombre] && <div>Cargando gráfico...</div>}
-                                        {historico[d.nombre] && <GraficoDolar datos={historico[d.nombre]} />}
+                                        {historico[d.nombre] && <GraficoDolar datos={historico[d.nombre]} nombre={d.nombre} />}
                                     </div>
                                 )}
                             </CardDolar>

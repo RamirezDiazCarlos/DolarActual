@@ -1,51 +1,95 @@
-import * as React from 'react';
-import { LineChart } from '@mui/x-charts/LineChart';
+import React, { useMemo, useEffect, useRef } from "react";
+import CanvasJSReact from '@canvasjs/react-stockcharts';
 
-export default function GraficoDolar({ datos }) {
+const CanvasJSStockChart = CanvasJSReact.CanvasJSStockChart;
+
+export default function GraficoDolar({ datos, nombre }) {
+    const chartRef = useRef(null);
+
+    const dataPoints = useMemo(() => {
+        if (!datos) return [];
+        return datos.map(d => ({
+            x: new Date(d.fecha),
+            y: Number(d.venta)
+        }));
+    }, [datos]);
+
+    const oneYearAgo = useMemo(() => {
+        if (!dataPoints.length) return undefined;
+        const lastDate = dataPoints[dataPoints.length - 1].x;
+        const yearAgo = new Date(lastDate);
+        yearAgo.setFullYear(yearAgo.getFullYear() - 1);
+        const firstInRange = dataPoints.find(dp => dp.x >= yearAgo);
+        return firstInRange ? firstInRange.x : dataPoints[0].x;
+    }, [dataPoints]);
+
+    useEffect(() => {
+        if (chartRef.current) {
+            chartRef.current.render();
+        }
+        const timeout = setTimeout(() => {
+            if (chartRef.current) {
+                chartRef.current.render();
+            }
+        }, 400);
+        return () => clearTimeout(timeout);
+    }, [datos]);
+
+    const options = {
+        title: { text: `Histórico de ${nombre}`, fontColor: "#fff" },
+        backgroundColor: "transparent",
+        theme: "light2",
+        charts: [{
+            axisX: {
+                crosshair: { enabled: true, snapToDataPoint: true, valueFormatString: "DD/MM/YY", labelFontColor: "#fff" },
+                labelFontColor: "#fff",
+                lineColor: "#fff",
+                tickColor: "#fff"
+            },
+            axisY: {
+                title: "Precio Venta",
+                prefix: "$",
+                crosshair: { enabled: true, snapToDataPoint: true, valueFormatString: "$#,###.##", labelFontColor: "#fff" },
+                labelFontColor: "#fff",
+                titleFontColor: "#fff",
+                lineColor: "#fff",
+                tickColor: "#fff"
+            },
+            toolTip: { shared: true, fontColor: "#fff", backgroundColor: "#222" },
+            data: [{
+                name: "Venta",
+                type: "splineArea",
+                color: "#2ac19d",
+                yValueFormatString: "$#,###.##",
+                xValueFormatString: "DD/MM/YY",
+                dataPoints,
+                lineColor: "#2ac19d",
+                markerColor: "#2ac19d"
+            }]
+        }],
+        navigator: {
+            slider: {
+                minimum: oneYearAgo,
+                maximum: dataPoints.length ? dataPoints[dataPoints.length - 1].x : undefined
+            }
+        }
+    };
+
+    const containerProps = {
+        width: "100%",
+        height: "320px",
+        margin: "auto"
+    };
+
     if (!datos || datos.length === 0) {
         return <div>No hay datos disponibles para mostrar.</div>;
     }
-    const ultimos6Meses = datos.slice(-180);
-    const xAxis = ultimos6Meses.map(d => d.fecha);
-    const yAxis = ultimos6Meses.map(d => d.venta);
 
     return (
-        <div style={{ width: "100%", minWidth: 0 }}>
-            <LineChart
-                xAxis={[{
-                    data: xAxis,
-                    scaleType: 'point',
-                    label: 'Fecha',
-                    tickLabelStyle: { fill: "#fff", fontSize: 10, angle: 45, textAnchor: "start" }
-                }]}
-                series={[
-                    {
-                        data: yAxis,
-                        area: true,
-                        label: 'Venta',
-                        color: "#2ac19d",
-                        showMark: false,
-                        areaFill: "#2ac19d33",
-                        highlightScope: "series",
-                    },
-                ]}
-                width={undefined}
-                height={window.innerWidth < 600 ? 220 : 320}
-                margin={{ left: 40, right: 10, top: 20, bottom: 60 }}
-                grid={{ vertical: false, horizontal: true }}
-                sx={{
-                    background: "transparent",
-                    borderRadius: 12,
-                    padding: 0,
-                    color: "#fff",
-                    ".MuiChartsAxis-root .MuiChartsAxis-tickLabel": {
-                        fill: "#fff"
-                    },
-                    ".MuiChartsLegend-root": {
-                        color: "#fff"
-                    }
-                }}
-            />
-        </div>
+        <CanvasJSStockChart
+            containerProps={containerProps}
+            options={options}
+            onRef={ref => chartRef.current = ref}
+        />
     );
 }
