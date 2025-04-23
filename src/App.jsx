@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import './App.css'
 import Inflacion from "./components/Inflacion";
 import Conversor from "./components/Conversor";
@@ -21,7 +21,7 @@ function App() {
         <title>Cotizador de Dólar Actual</title>
         <meta name="description" content="Consulta el valor actualizado del dólar, gráficos históricos y conversor de divisas en Argentina." />
         <meta name="keywords" content="dólar, cotización, argentina, blue, oficial, mep, contado con liqui, conversor, inflación" />
-        <meta name="author" content="Tu Nombre o Proyecto" />
+        <meta name="author" content="Dolar Actual" />
         <meta property="og:title" content="Cotizador de Dólar Actual" />
         <meta property="og:description" content="Cotizaciones actualizadas, gráficos históricos y conversor de divisas en Argentina." />
         <meta property="og:type" content="website" />
