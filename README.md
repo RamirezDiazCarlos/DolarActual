@@ -6,7 +6,7 @@ DolarActual es una web interactiva para consultar las cotizaciones de los distin
 
 - Conversor de monedas entre pesos argentinos y diferentes tipos de dólar.
 - Visualización de cotizaciones actualizadas: Oficial, Blue, MEP, Contado con Liqui, etc.
-- Gráficos históricos diarios de cada tipo de dólar (últimos 6 meses).
+- Gráficos históricos diarios de cada tipo de dólar (último año).
 - Consulta de inflación mensual con gráfico.
 - Interfaz moderna, responsiva y fácil de usar.
 - Fuente de datos: [ArgentinaDatos.com](https://www.argentinadatos.com/).
