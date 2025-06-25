@@ -1,10 +1,14 @@
-import React, { useMemo, useEffect, useRef } from "react";
-import CanvasJSReact from '@canvasjs/react-stockcharts';
-
-const CanvasJSStockChart = CanvasJSReact.CanvasJSStockChart;
+import React, { useMemo, useEffect, useRef, useState } from "react";
 
 export default function GraficoDolar({ datos, nombre }) {
+    const [CanvasJSStockChart, setCanvasJSStockChart] = useState(null);
     const chartRef = useRef(null);
+
+    useEffect(() => {
+        import('@canvasjs/react-stockcharts')
+            .then(mod => setCanvasJSStockChart(mod.CanvasJSStockChart))
+            .catch(err => console.error('CanvasJS load failed', err));
+    }, []);
 
     const dataPoints = useMemo(() => {
         if (!datos) return [];
@@ -83,6 +87,10 @@ export default function GraficoDolar({ datos, nombre }) {
 
     if (!datos || datos.length === 0) {
         return <div>No hay datos disponibles para mostrar.</div>;
+    }
+
+    if (!CanvasJSStockChart) {
+        return <div>Cargando gr\xC3\xA1fico...</div>;
     }
 
     return (
