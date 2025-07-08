@@ -28,7 +28,7 @@ function App() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Cotizador de Dólar Actual" />
         <meta name="twitter:description" content="Cotizaciones actualizadas, gráficos históricos y conversor de divisas en Argentina." />
-        <link rel="icon" href="/DolarActual/public/logo.png" />
+        <link rel="icon" href="/logo.png" />
       </Helmet>
       <Navbar />
       <Conversor />
