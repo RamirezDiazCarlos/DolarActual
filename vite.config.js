@@ -6,6 +6,10 @@ export default defineConfig({
   plugins: [react()],
   // base: '/DolarActual/',
   build: {
+    commonjsOptions: {
+      include: [/node_modules/],
+      transformMixedEsModules: true,
+    },
     rollupOptions: {
       output: {
         manualChunks: {
