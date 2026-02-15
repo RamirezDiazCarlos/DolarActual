@@ -1,8 +1,6 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { fetchDolares } from '../services/dolarService';
+import { useState, useEffect, useCallback } from 'react';
 
-const Conversor = () => {
-    const [dolares, setDolares] = useState([]);
+const Conversor = ({ dolares }) => {
     const [tipoSeleccionado, setTipoSeleccionado] = useState('');
     const [monto, setMonto] = useState('');
     const [resultado, setResultado] = useState(null);
@@ -10,18 +8,10 @@ const Conversor = () => {
     const [precioSeleccionado, setPrecioSeleccionado] = useState(null);
 
     useEffect(() => {
-        const obtenerDolares = async () => {
-            try {
-                const data = await fetchDolares();
-                setDolares(data);
-                setTipoSeleccionado(data[0]?.nombre || '');
-            } catch (err) {
-                console.error('Error al cargar los dólares:', err);
-            }
-        };
-
-        obtenerDolares();
-    }, []);
+        if (dolares.length && !tipoSeleccionado) {
+            setTipoSeleccionado(dolares[0].nombre);
+        }
+    }, [dolares, tipoSeleccionado]);
 
     const convertir = useCallback(() => {
         const dolar = dolares.find(d => d.nombre === tipoSeleccionado);
@@ -53,7 +43,8 @@ const Conversor = () => {
                                 <img
                                     src={aDolares ? "/ar.svg" : "/us.svg"}
                                     alt={aDolares ? "Peso argentino" : "Dólar estadounidense"}
-                                    style={{ width: 24, height: 24 }}
+                                    width="24"
+                                    height="24"
                                 />
                             </span>
                             <input
@@ -86,7 +77,8 @@ const Conversor = () => {
                                 <img
                                     src={aDolares ? "/us.svg" : "/ar.svg"}
                                     alt={aDolares ? "Dólar estadounidense" : "Peso argentino"}
-                                    style={{ width: 24, height: 24 }}
+                                    width="24"
+                                    height="24"
                                 />
                             </span>
                             <input
@@ -133,7 +125,6 @@ const Conversor = () => {
                 </div>
             </div>
         </div>
-
     );
 };
 

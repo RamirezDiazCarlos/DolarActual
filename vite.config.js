@@ -5,6 +5,16 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   // base: '/DolarActual/',
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'charts-apex': ['apexcharts', 'react-apexcharts'],
+          'charts-canvasjs': ['@canvasjs/react-stockcharts'],
+        }
+      }
+    }
+  },
   test: {
     globals: true,
     environment: 'jsdom',

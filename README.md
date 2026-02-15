@@ -1,39 +1,34 @@
 # DolarActual
 
-DolarActual es una web interactiva para consultar las cotizaciones de los distintos tipos de dólar en Argentina, visualizar su evolución histórica, convertir entre pesos y dólares, y consultar la inflación mensual. 
+DolarActual es una web interactiva para consultar las cotizaciones de los distintos tipos de dólar en Argentina, visualizar su evolución histórica, convertir entre pesos y dólares, y consultar la inflación mensual.
 
 ## Características
 
 - Conversor de monedas entre pesos argentinos y diferentes tipos de dólar.
-- Visualización de cotizaciones actualizadas: Oficial, Blue, MEP, Contado con Liqui, etc.
-- Gráficos históricos diarios de cada tipo de dólar (último año).
-- Consulta de inflación mensual con gráfico.
-- Interfaz moderna, responsiva y fácil de usar.
-- Fuente de datos: [ArgentinaDatos.com](https://www.argentinadatos.com/).
+- Cotizaciones actualizadas cada 5 minutos: Oficial, Blue, Bolsa, Contado con Liqui, Mayorista, Cripto y Tarjeta.
+- Gráficos históricos interactivos de cada tipo de dólar (último año).
+- Gráfico de inflación mensual en Argentina.
+- Interfaz responsiva con tema oscuro.
 
 ## Tecnologías
 
-- React
+- React 18
+- Vite
 - Bootstrap 5
-- Framer Motion
-- MUI X Charts
-- ApexCharts
-- API pública de ArgentinaDatos
+- ApexCharts (inflación)
+- CanvasJS StockCharts (histórico de dólar)
 
-## Estructura principal
+## APIs
 
-- Conversor de monedas.
-- Lista y cards de cotizaciones.
-- Gráfico histórico de cada dólar.
-- Gráfico de inflación mensual.
-- Pie de página con créditos y fuente de datos.
-- Hook para obtener cotizaciones desde la API.
+- [dolarapi.com](https://dolarapi.com) — Cotizaciones en tiempo real.
+- [ArgentinaDatos.com](https://www.argentinadatos.com/) — Histórico de cotizaciones e inflación.
 
-## Créditos
+## Instalación
 
-- Desarrollado por Carlos Ramírez Díaz.
-- Fuente de datos: [ArgentinaDatos.com](https://www.argentinadatos.com/).
-- GitHub: [RamirezDiazCarlos](https://github.com/RamirezDiazCarlos)
+```bash
+npm install
+npm run dev
+```
 
 ---
 

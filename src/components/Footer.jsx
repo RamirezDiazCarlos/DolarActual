@@ -1,5 +1,3 @@
-import React from "react";
-
 const Footer = () => (
     <footer className="text-center mt-5 py-4" style={{  color: "#fff" }}>
         <p>

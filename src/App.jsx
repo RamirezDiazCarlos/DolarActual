@@ -1,12 +1,38 @@
-import React from 'react';
-import { Helmet } from "react-helmet-async";
-import './App.css'
-import Inflacion from "./components/Inflacion";
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import Conversor from "./components/Conversor";
 import Navbar from "./components/Navbar";
 import ListaDolares from "./components/ListaDolares";
 import useDolares from "./hooks/useDolares";
 import Footer from './components/Footer';
+
+const Inflacion = lazy(() => import("./components/Inflacion"));
+
+function LazyOnVisible({ children, fallback, minHeight = 200 }) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} style={{ minHeight: visible ? undefined : minHeight }}>
+      {visible ? children : fallback}
+    </div>
+  );
+}
 
 function App() {
 
@@ -17,23 +43,14 @@ function App() {
 
   return (
     <div className="justify-content-center gradient-bg">
-      <Helmet>
-        <title>Cotizador de Dólar Actual</title>
-        <meta name="description" content="Consulta el valor actualizado del dólar, gráficos históricos y conversor de divisas en Argentina." />
-        <meta name="keywords" content="dólar, cotización, argentina, blue, oficial, mep, contado con liqui, conversor, inflación" />
-        <meta name="author" content="Dolar Actual" />
-        <meta property="og:title" content="Cotizador de Dólar Actual" />
-        <meta property="og:description" content="Cotizaciones actualizadas, gráficos históricos y conversor de divisas en Argentina." />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Cotizador de Dólar Actual" />
-        <meta name="twitter:description" content="Cotizaciones actualizadas, gráficos históricos y conversor de divisas en Argentina." />
-        <link rel="icon" href="/DolarActual/public/logo.png" />
-      </Helmet>
       <Navbar />
-      <Conversor />
+      <Conversor dolares={dolares} />
       <ListaDolares dolares={dolares} />
-      <Inflacion />
+      <LazyOnVisible minHeight={500}>
+        <Suspense fallback={<div className="text-center py-4">Cargando inflación...</div>}>
+          <Inflacion />
+        </Suspense>
+      </LazyOnVisible>
       <Footer />
     </div>
   )

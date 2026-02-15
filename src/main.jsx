@@ -1,16 +1,6 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
-import App from './App';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import App from './App';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <HelmetProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-      </Routes>
-    </BrowserRouter>
-  </HelmetProvider>
-);
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
