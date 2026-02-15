@@ -10,7 +10,6 @@ export default defineConfig({
       output: {
         manualChunks: {
           'charts-apex': ['apexcharts', 'react-apexcharts'],
-          'charts-canvasjs': ['@canvasjs/react-stockcharts'],
         }
       }
     }
