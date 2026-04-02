@@ -22,16 +22,16 @@ const Inflacion = () => {
                 setSeries([{ name: "Inflación", data: valores }]);
                 setOptions({
                     chart: {
-                        height: 450,
+                        height: 380,
                         type: 'bar',
                         background: 'transparent',
+                        toolbar: { show: false },
+                        fontFamily: 'Outfit, sans-serif',
                     },
                     plotOptions: {
                         bar: {
                             borderRadius: 6,
-                            dataLabels: {
-                                position: 'top',
-                            },
+                            dataLabels: { position: 'top' },
                         }
                     },
                     dataLabels: {
@@ -39,8 +39,9 @@ const Inflacion = () => {
                         formatter: val => `${val.toFixed(1)}%`,
                         offsetY: -20,
                         style: {
-                            fontSize: '12px',
-                            colors: ["#2ac19d"]
+                            fontSize: '11px',
+                            fontWeight: '500',
+                            colors: ["#2ac19d"],
                         }
                     },
                     xaxis: {
@@ -49,43 +50,53 @@ const Inflacion = () => {
                         axisBorder: { show: false },
                         axisTicks: { show: false },
                         tooltip: { enabled: true },
-                        labels: {
-                            style: {
-                                colors: '#fff'
-                            }
-                        }
+                        labels: { style: { colors: 'rgba(240,250,250,0.4)', fontSize: '12px' } }
                     },
                     yaxis: {
                         labels: {
                             formatter: val => `${val}%`,
-                            style: {
-                                colors: '#fff'
-                            }
+                            style: { colors: 'rgba(240,250,250,0.4)', fontSize: '12px' }
                         }
                     },
                     title: {
-                        text: 'Inflación mensual en Argentina',
-                        align: 'center',
-                        style: {
-                            color: '#fff',
-                            fontSize: '16px'
-                        }
+                        text: 'Últimos 12 meses',
+                        align: 'left',
+                        style: { color: 'rgba(240,250,250,0.5)', fontSize: '13px', fontWeight: '500' }
                     },
                     grid: {
-                        borderColor: '#444'
+                        borderColor: 'rgba(255,255,255,0.06)',
+                        strokeDashArray: 4,
                     },
-                    theme: {
-                        mode: 'dark'
-                    }
+                    theme: { mode: 'dark' },
+                    colors: ['#2ac19d'],
+                    fill: {
+                        type: 'gradient',
+                        gradient: {
+                            shade: 'dark',
+                            type: 'vertical',
+                            shadeIntensity: 0.4,
+                            gradientToColors: ['rgba(42,193,157,0.5)'],
+                            stops: [0, 100],
+                        }
+                    },
                 });
             })
             .catch(err => console.error('Error al cargar inflación:', err));
     }, []);
 
     return (
-        <div className="mt-4 bg-[#0f3d42] p-4 rounded-xl shadow-md mt-6 max-w-3xl mx-auto">
-            <ReactApexChart options={options} series={series} type="bar" height={450} />
-        </div>
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+            <div className="mb-6">
+                <p className="text-xs font-medium text-[#2ac19d] uppercase tracking-widest mb-1">Indicadores</p>
+                <h2 className="text-3xl font-bold tracking-tight">Inflación</h2>
+            </div>
+            <div
+                className="bg-white/5 border border-white/10 rounded-2xl p-6"
+                style={{ boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)' }}
+            >
+                <ReactApexChart options={options} series={series} type="bar" height={380} />
+            </div>
+        </section>
     );
 };
 

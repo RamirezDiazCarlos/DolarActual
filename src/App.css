@@ -1,105 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Outfit', sans-serif;
+  --color-brand: #2ac19d;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
+  font-family: 'Outfit', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(160deg, #017086 0%, #062830 30%, #030f14 65%);
+  min-height: 100dvh;
+  color: #f0fafa;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
+/* Hide number input spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
-.actualizacion-general {
-    font-size: 1rem;
-    color: #ffffff;
-    margin-bottom: 2rem;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(42, 193, 157, 0.25);
+  border-radius: 3px;
 }
 
-.gradient-bg {
-    min-height: 100vh;
-    background: linear-gradient(to bottom, #017086, #0b444d);
-    color: white;
-}
-
-/* ── Card base ── */
-.card {
-    box-shadow: 0 4px 24px rgba(64,196,255,0.08), 0 1.5px 4px rgba(0,0,0,0.12);
-}
-
-/* ── Card hover effect ── */
-.card-hover {
-    cursor: pointer;
-    transition: box-shadow 0.3s, transform 0.3s;
-}
-
-.card.card-hover:hover {
-    box-shadow: 0 8px 32px rgba(64,196,255,0.25), 0 4px 8px rgba(0,0,0,0.3) !important;
-    transform: scale(1.04) !important;
-    border-color: #2ac19d !important;
-    z-index: 2;
-}
-
-/* ── Modal ── */
-.modal-backdrop-custom {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 1050;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    animation: fadeIn 0.2s ease;
-}
-
-.modal-content-custom {
-    background: #1a1a2e;
-    border: 1px solid #2ac19d;
-    border-radius: 1rem;
-    padding: 2rem;
-    width: 100%;
-    max-width: 800px;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-    color: #fff;
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
-    animation: scaleIn 0.25s ease;
-}
-
-.modal-close-btn {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-}
-
-.modal-title-custom {
-    font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-.modal-prices {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-}
-
-.modal-chart {
-    margin-top: 1.5rem;
-    width: 100%;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes scaleIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
+/* Select option dark background */
+select option {
+  background-color: #0a2028;
+  color: #f0fafa;
 }
